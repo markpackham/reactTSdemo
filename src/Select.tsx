@@ -6,13 +6,23 @@ export type SelectOption = {
     value: string | number
   }
     
-  type SelectProps = {
-    options: SelectOption[]
+  type MultipleSelectProps = {
+    multiple: true
+    value: SelectOption[]
+    onChange: (value: SelectOption[]) => void
+  }
+  
+  type SingleSelectProps = {
+    multiple?: false
     value?: SelectOption
     onChange: (value: SelectOption | undefined) => void
-  } 
+  }
+  
+  type SelectProps = {
+    options: SelectOption[]
+  } & (SingleSelectProps | MultipleSelectProps)
 
-export function Select({value, onChange, options}:SelectProps){
+export function Select({multiple, value, onChange, options}:SelectProps){
   const [isOpen, setIsOpen] = useState(false)
   const [highlightedIndex, setHighlightedIndex] = useState(0)
 
@@ -61,7 +71,7 @@ export function Select({value, onChange, options}:SelectProps){
             setIsOpen(false)
           }}
           onMouseEnter={() => setHighlightedIndex(index)}
-          key={option.label} 
+          key={option.value} 
           className={`${styles.option} ${
             isOptionSelected(option) ? styles.selected : ""
           } ${index === highlightedIndex ? styles.highlighted : ""}`}>
