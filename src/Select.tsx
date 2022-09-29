@@ -21,12 +21,18 @@ export function Select({value, onChange, options}:SelectProps){
   }
 
   function selectOption(option: SelectOption){
-    onChange(option)
+    if(option !== value){
+      onChange(option)
+    }
   }
 
   function isOptionSelected(option: SelectOption){
     return option === value
   }
+
+  useEffect(()=>{
+    if(isOpen) setHighlightedIndex(0)
+  },[isOpen])
 
     return (
         <div
@@ -61,7 +67,7 @@ export function Select({value, onChange, options}:SelectProps){
           } ${index === highlightedIndex ? styles.highlighted : ""}`}>
             {option.label}
           </li>
-          
+
         ))}
       </ul>
 
