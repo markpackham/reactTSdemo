@@ -28,7 +28,12 @@ export function Select({value, onChange, options}:SelectProps){
   const [isOpen, setIsOpen] = useState(false)
 
     return (
-        <div tabIndex={0} className={styles.container}>
+        <div
+        onBlur={()=> setIsOpen(false)}
+        onClick={()=> setIsOpen(prev => !prev)}
+        tabIndex={0} 
+        className={styles.container}
+        >
         <span className={styles.value}>{value?.label}</span>
         <button className={styles["clear-btn"]}>&times;</button>
         <div className={styles.divider}></div>
