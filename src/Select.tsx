@@ -1,15 +1,25 @@
 import styles from "./select.module.css"
 
-type SelectOptions = {
+export type SelectOption = {
     label: string
-    value: string
-}
-
-type SelectProps = {
-    options: SelectOptions[]
-    value?: SelectOptions
-    onChange: (value: SelectOptions | undefined)=> void
-}
+    value: string | number
+  }
+  
+  type MultipleSelectProps = {
+    multiple: true
+    value: SelectOption[]
+    onChange: (value: SelectOption[]) => void
+  }
+  
+  type SingleSelectProps = {
+    multiple?: false
+    value?: SelectOption
+    onChange: (value: SelectOption | undefined) => void
+  }
+  
+  type SelectProps = {
+    options: SelectOption[]
+  } & (SingleSelectProps | MultipleSelectProps)
 
 export function Select({value, onChange, options}:SelectProps){
     return (
