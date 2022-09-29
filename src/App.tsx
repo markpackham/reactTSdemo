@@ -16,14 +16,15 @@ function App(){
 
   return (
     <>
-    <Select 
-    options={options} value={value2} onChange={o => setValue(o)}
-    />
-    <br />
-    <Select 
-    options={options}
-    />
-  </>
+      <Select
+        multiple
+        options={options}
+        value={value1}
+        onChange={o => setValue1(o)}
+      />
+      <br />
+      <Select options={options} value={value2} onChange={o => setValue2(o)} />
+    </>
   )
 }
 

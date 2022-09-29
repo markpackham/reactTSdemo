@@ -5,19 +5,7 @@ export type SelectOption = {
     label: string
     value: string | number
   }
-  
-  type MultipleSelectProps = {
-    multiple: true
-    value: SelectOption[]
-    onChange: (value: SelectOption[]) => void
-  }
-  
-  type SingleSelectProps = {
-    multiple?: false
-    value?: SelectOption
-    onChange: (value: SelectOption | undefined) => void
-  }
-  
+    
   type SelectProps = {
     options: SelectOption[]
     value?: SelectOption
@@ -29,6 +17,10 @@ export function Select({value, onChange, options}:SelectProps){
 
   function clearOptions(){
     onChange(undefined)
+  }
+
+  function selectOption(option: SelectOption){
+    onChange(option)
   }
 
     return (
@@ -50,7 +42,13 @@ export function Select({value, onChange, options}:SelectProps){
         
         <ul className={`${styles.options} ${isOpen ? styles.show : ""}`}>
         {options.map(option => (
-          <li key={option.label} className={styles.option}>
+          <li 
+          onClick={e =>{
+            e.stopPropagation()
+            selectOption(option)
+            setIsOpen(false)
+          }}
+          key={option.label} className={styles.option}>
             {option.label}
           </li>
         ))}
