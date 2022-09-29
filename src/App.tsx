@@ -11,7 +11,13 @@ const options = [
 function App(){
   return (
     <>
-    <Select />
+    <Select 
+    options={options}
+    />
+    <br />
+    <Select 
+    options={options}
+    />
   </>
   )
 }
